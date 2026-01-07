@@ -45,6 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderPrompt = () => {
+    
+    	// Add this at the end of renderPrompt()
+		terminalBody.scrollTop = terminalBody.scrollHeight;
+
+		// Also force it on focus (helps iOS)
+		hiddenInput.addEventListener('focus', () => {
+			setTimeout(() => {
+				terminalBody.scrollTop = terminalBody.scrollHeight;
+			}, 300); // Small delay for keyboard animation
+		});
         const livePrompt = terminalBody.querySelector('.live-prompt');
         if (livePrompt) livePrompt.remove();
 
@@ -83,6 +93,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		clear: () => {
 		    terminalBody.innerHTML = '';
+		},
+		date: () => {
+		    const now = new Date();
+
+		    // Format like classic Unix `date` command
+		    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+		    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+		                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+		    const dayName = days[now.getUTCDay()];
+		    const monthName = months[now.getUTCMonth()];
+		    const day = String(now.getUTCDate()).padStart(2, '0');
+		    const hours = String(now.getUTCHours()).padStart(2, '0');
+		    const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+		    const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+		    const year = now.getUTCFullYear();
+
+		    const formattedDate = `${dayName} ${monthName} ${day} ${hours}:${minutes}:${seconds} UTC ${year}`;
+
+		    appendLine(`<span style="color: #8be9fd;">${formattedDate}</span>`);
 		},
 	};
 

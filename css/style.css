@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+a{
+	text-decoration: none;
+}
 
 body {
     background-color: #2e0d3a; /* Dark Ubuntu purple */
@@ -39,12 +42,25 @@ h1 {
     letter-spacing: 4px;
 }
 
-.welcome {
+/* Make h1 link on subpages behave like plain text */
+header h1 a {
+    color: inherit;              /* Use the same color as h1 */
+    text-decoration: none;       /* Remove underline */
+    transition: none;            /* Disable any hover transition if you have one */
+}
+
+header h1 a:hover {
+    color: inherit;              /* No color change on hover */
+    text-decoration: none;
+}
+
+.page-description {
     font-size: 1rem;
     max-width: 800px;
     margin: 0 auto 30px;
     opacity: 0.9;
     text-align: left;
+    min-height: 50px;
 }
 
 nav {
@@ -147,7 +163,7 @@ footer {
         letter-spacing: 2px;
     }
 
-    .welcome {
+    .page-description {
         font-size: 0.9rem;
         margin-bottom: 20px;
         text-align: center;
@@ -173,3 +189,221 @@ footer {
         font-size: 0.75rem;
     }
 }
+
+/* Mobile: Use viewport height for more space, minus keyboard impact */
+@media (max-width: 768px) {
+    .terminal {
+        height: 65vh;     /* Takes ~65% of screen height – adjustable */
+        max-height: 500px; /* Cap it so it doesn't overflow tiny screens */
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal {
+        height: 70vh;     /* Even more room on small phones */
+        max-height: 550px;
+    }
+}
+
+/* GALLERY PAGE */
+.gallery-main {
+    flex: 1;
+    width: 100%;
+    max-width: 1100px;
+    padding: 40px 20px;
+    margin: 0 auto;
+
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: minmax(200px, auto);
+    grid-auto-flow: dense;
+    gap: 20px;                  
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;                  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Keep cover for fill */
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    transform: scale(1.1);
+}
+
+/* Caption */
+.gallery-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: #e0e0e0;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    text-align: left;
+    font-family: 'Ubuntu Mono', monospace;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+}
+
+/* Size variants for chaos */
+.gallery-item.wide  { grid-column: span 2; }
+.gallery-item.tall  { grid-row: span 2; }
+.gallery-item.big   { grid-column: span 2; grid-row: span 2; }
+
+/* Mobile: simple vertical stack, no chaos packing */
+@media (max-width: 768px) {
+
+	/* GALLERY PAGE */
+	.gallery-main {
+		padding: 0;
+		margin: 0 auto;
+		padding-top: 15px;
+		padding-bottom: 15px;
+
+	}
+    .gallery-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;              
+        grid-auto-flow: initial; 
+    }
+
+    .gallery-item {
+        width: 100%;
+        height: auto;
+        min-height: 200px;
+    }
+
+    .gallery-item img {
+        height: auto;
+        aspect-ratio: attr(width) / attr(height);
+        object-fit: cover;     
+        background: #1a0b1f;      
+    }
+
+    /* Remove span classes on mobile  */
+    .gallery-item.wide,
+    .gallery-item.tall,
+    .gallery-item.big {
+        grid-column: initial;
+        grid-row: initial;
+    }
+
+    .gallery-caption {
+        opacity: 1;           
+        font-size: 0.9rem;
+        background: rgba(0, 0, 0, 0.75);
+    }
+}
+
+.shitpost-list {
+    max-width: 800px;
+    margin: 40px auto;
+    padding-left: 1.8rem;
+}
+
+.shitpost {
+    margin-bottom: 3rem;
+    border-left: 2px solid #444;
+    padding-left: 1.6rem;
+    text-align: left;
+    transition: border-color 0.2s ease, padding-left 0.2s ease;
+    cursor: pointer;
+}
+
+.shitpost:hover {
+    border-left-color: #ff79c6;
+    padding-left: 1.8rem;
+}
+
+
+.shitpost h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.shitpost p {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+    width: 720px;
+}
+
+.shitpost time {
+    font-size: 0.8rem;
+    color: #777;
+    display: block;
+    margin-bottom: 0.6rem;
+}
+
+/* Shitpost article images */
+.shitpost-media {
+    width: 100%;      /* Fixed container width */
+    height: 100%;     /* Fixed container height */
+    overflow: hidden;  /* Hide overflow if image is slightly off */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 2px;
+}
+
+.shitpost-media img {
+    width: 100%;       /* Fill container width */
+    height: 100%;      /* Fill container height */
+    object-fit: cover; /* Keep image ratio, crop if needed */
+    display: block;
+}
+
+@media (max-width: 768px) {
+	.shitpost-list {
+		margin: 20px auto;
+		padding-left: 0rem;
+	}
+	.shitpost {
+ 		padding: 0;
+ 		margin-bottom: 40px;
+		padding-left: 0.6rem;
+		
+	}
+	
+	.shitpost:hover {
+		padding-left: 0;
+	}
+		
+	.shitpost h2 {
+		font-size: 1rem;
+		width: 320px;
+	}
+
+	.shitpost p {
+		font-size: 0.85rem;
+
+		width: unset;
+	}
+}
+
+
+nav a.active {
+    color: #ff79c6;
+}
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery — Rekav</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- We'll add gallery-specific rules -->
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">Rekav</a></h1>
+        <p class="page-description">Visual dump</p>
+       
+        <nav>
+            <ul>
+                <li><a href="shitpost.html">Shitpost</a></li>
+                <li><a href="random.html">Random</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="gallery-main">
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Images will be injected by JS for random order -->
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Rekav – Built with HTML, CSS, and JS Vanilla.</p>
+    </footer>
+
+    <script src="js/gallery.js"></script> <!-- New JS file for random + future lightbox -->
+</body>
+</html>
