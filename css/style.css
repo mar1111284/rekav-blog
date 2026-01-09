@@ -8,9 +8,9 @@ a{
 }
 
 body {
-    background-color: #2e0d3a; /* Dark Ubuntu purple */
+    background-color: #2e0d3a;
     color: #eeeeee;
-    font-family: 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', 'Ubuntu Mono', monospace; /* Terminal-like monospace fallback */
+    font-family: 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', 'Ubuntu Mono', monospace;
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
@@ -20,7 +20,6 @@ body {
     text-align: center;
 }
 
-/* Load your custom Bitmgothic font */
 @font-face {
     font-family: 'Bitmgothic';
     src: url('../assets/font/Bitmgothic/Bitmgothic.ttf') format('truetype');
@@ -29,7 +28,7 @@ body {
 }
 
 header {
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -155,7 +154,7 @@ footer {
     }
 
     header {
-        margin-bottom: 0;
+        margin-bottom: 20px;
     }
 
     h1 {
@@ -316,94 +315,84 @@ footer {
     }
 }
 
-.shitpost-list {
-    max-width: 800px;
-    margin: 40px auto;
-    padding-left: 1.8rem;
-}
-
-.shitpost {
-    margin-bottom: 3rem;
-    border-left: 2px solid #444;
-    padding-left: 1.6rem;
-    text-align: left;
-    transition: border-color 0.2s ease, padding-left 0.2s ease;
-    cursor: pointer;
-}
-
-.shitpost:hover {
-    border-left-color: #ff79c6;
-    padding-left: 1.8rem;
-}
-
-
-.shitpost h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-}
-
-.shitpost p {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
-    width: 720px;
-}
-
-.shitpost time {
-    font-size: 0.8rem;
-    color: #777;
-    display: block;
-    margin-bottom: 0.6rem;
-}
-
-/* Shitpost article images */
-.shitpost-media {
-    width: 100%;      /* Fixed container width */
-    height: 100%;     /* Fixed container height */
-    overflow: hidden;  /* Hide overflow if image is slightly off */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    border-radius: 2px;
-}
-
-.shitpost-media img {
-    width: 100%;       /* Fill container width */
-    height: 100%;      /* Fill container height */
-    object-fit: cover; /* Keep image ratio, crop if needed */
-    display: block;
-}
-
-@media (max-width: 768px) {
-	.shitpost-list {
-		margin: 20px auto;
-		padding-left: 0rem;
-	}
-	.shitpost {
- 		padding: 0;
- 		margin-bottom: 40px;
-		padding-left: 0.6rem;
-		
-	}
-	
-	.shitpost:hover {
-		padding-left: 0;
-	}
-		
-	.shitpost h2 {
-		font-size: 1rem;
-		width: 320px;
-	}
-
-	.shitpost p {
-		font-size: 0.85rem;
-
-		width: unset;
-	}
-}
-
-
 nav a.active {
     color: #ff79c6;
 }
 
+.about-page{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+.about-content{
+	font-size: 1rem;
+	max-width: 800px;
+}
+.about-content p{
+	text-align: left;
+	margin-bottom: 60px;
+}
+
+
+.about-links {
+  margin: 2rem 0;
+}
+
+.about-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.about-links li {
+  flex: 0 0 auto;
+}
+
+.about-links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: #e0e0e0;
+  width: 90px;
+  padding: 2rem 4rem;
+  border-radius: 4px;
+  background: rgba(40, 40, 60, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.25s ease;
+  font-size: 0.9rem;
+}
+
+.about-links a:hover,
+.about-links a:focus {
+  background: rgba(60, 60, 90, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  color: white;
+}
+
+/* Icons */
+.about-links a::before {
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+/* Brand colors on hover (optional) */
+.about-links a[href*="youtube"]:hover     { color: #ff0000; }
+.about-links a[href*="github"]:hover      { color: #ffffff; }
+.about-links a[href*="looperman"]:hover   { color: #00d4ff; }
+
+@media (max-width: 480px) {
+    .about-content p {
+    	text-align: center;
+    	margin-bottom: 20px;
+    	font-size: 0.9rem;
+    }
+}

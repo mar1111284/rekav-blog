@@ -1,0 +1,111 @@
+/* article-preview.css
+   Generic preview card styles for lists (shitpost, random, future sections)
+*/
+
+.preview-list {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1.5rem; /* Cosmetic right padding */
+}
+
+.preview-item {
+  margin-bottom: 3.5rem;
+  padding-left: 1.5rem;
+  border-left: 3px solid #333;
+  transition: border-left-color 0.25s ease, padding-left 0.25s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+.preview-item:hover {
+  border-left-color: #ff79c6;
+  padding-left: 1.8rem;
+}
+
+.preview-item h2 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.preview-item time {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.5px;
+}
+
+.preview-item p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  max-width: 720px;
+}
+
+/* ────────────────────────────────────────────────
+   Media / Preview Image Container
+   ──────────────────────────────────────────────── */
+.preview-media {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  margin-bottom: 1.4rem;
+  border-radius: 2px;
+  position: relative;
+}
+
+.preview-media img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.preview-media.random img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  background: #0a0a0a;
+  filter: grayscale(100%) blur(8px);
+  transition: filter 0.7s ease, opacity 0.9s ease;
+  opacity: 0.4;
+  filter: grayscale(100%);
+}
+
+.preview-media img.loaded {
+  opacity: 1;        /* very subtle pop */
+}
+
+/* ────────────────────────────────────────────────
+   Mobile adjustments
+   ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .preview-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .preview-item {
+    padding-left: 0.8rem;
+    margin-bottom: 3rem;
+  }
+
+  .preview-item:hover {
+    padding-left: 1rem;
+  }
+
+  .preview-item h2 {
+    font-size: 1rem;
+  }
+
+  .preview-item p {
+    font-size: 0.85rem;
+    max-width: none;
+  }
+
+  .preview-media {
+    aspect-ratio: 16 / 10;          /* wider on mobile */
+  }
+}

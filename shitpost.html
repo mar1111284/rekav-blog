@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rekav — Shitposts</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/article-preview.css">
 </head>
 <body>
     <header>
@@ -24,12 +25,11 @@
     </header>
 
     <main>
-		<p id="root-warning" style="color: yellow; font-weight: bold; text-align: center; margin: 2em;">
-			root access required!
+		<p id="root-warning" style="color: yellow;font-size: 0.85rem; font-weight: normal; text-align: center;">
+			root access required.
 		</p>
 
 		<script>
-		  // This runs immediately after the <p>, so element exists
 		  window.REKAV_ROOT = (sessionStorage.getItem('rekav_root_session') === 'true');
 
 		  const warning = document.getElementById('root-warning');
@@ -37,57 +37,17 @@
 		  if (window.REKAV_ROOT) {
 			warning.style.display = 'none';
 		  } else {
-			warning.style.display = 'block'; // ensures it's visible
+			warning.style.display = 'block';
 		  }
 		</script>
 
-        <section class="shitpost-list">
-        
-             <article class="shitpost">
-				<div class="shitpost-media">
-				</div>
-                <h2>There is no clean exit</h2>
-                <time datetime="2026-01-03">Jan 3, 2026</time>
-                <p>You either leave too early and remain misunderstood,or stay too long and rot with the furniture.</p>
-            </article>
-
-             <article class="shitpost">
-				<div class="shitpost-media">
-				</div>
-                <h2>There is no clean exit</h2>
-                <time datetime="2026-01-03">Jan 3, 2026</time>
-                <p>You either leave too early and remain misunderstood,or stay too long and rot with the furniture.</p>
-            </article>
-
-             <article class="shitpost">
-				<div class="shitpost-media">
-				</div>
-                <h2>There is no clean exit</h2>
-                <time datetime="2026-01-03">Jan 3, 2026</time>
-                <p>You either leave too early and remain misunderstood,or stay too long and rot with the furniture.</p>
-            </article>
-            
-            <article class="shitpost">
-				<div class="shitpost-media">
-				</div>
-                <h2>There is no clean exit</h2>
-                <time datetime="2026-01-03">Jan 3, 2026</time>
-                <p>You either leave too early and remain misunderstood,or stay too long and rot with the furniture.</p>
-            </article>
-            
-            <article class="shitpost">
-				<div class="shitpost-media">
-				</div>
-                <h2>There is no clean exit</h2>
-                <time datetime="2026-01-03">Jan 3, 2026</time>
-                <p>You either leave too early and remain misunderstood,or stay too long and rot with the furniture.</p>
-            </article>
+        <section class="preview-list" id="shitpost-container">
 
         </section>
     </main>
 
     <footer>
-        <p>© 2026 Rekav – Built with HTML, CSS, and JS Vanilla.</p>
+        <p>© 2026 Rekav</p>
     </footer>
     
      <script src="js/shitpost.js"></script>
