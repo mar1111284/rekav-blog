@@ -1,3 +1,4 @@
+<!-- gallery.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,12 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery — Rekav</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <style>
+        /* Quick lightbox styles — you can move to css later */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.96);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 2rem;
+            cursor: zoom-out;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 96vw;
+            max-height: 96vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 25px 70px -15px rgba(0,0,0,0.7);
+            transform: scale(0.92);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+        .lightbox.active img {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            color: white;
+            font-size: 2.2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .close-btn:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1><a href="index.html">Rekav</a></h1>
-        <p class="page-description">Visual dump</p>
-       
+        <p class="page-description">Visual dump from my phone. You're welcome.</p>
+      
         <nav>
             <ul>
                 <li><a href="shitpost.html">Shitpost</a></li>
@@ -22,14 +67,19 @@
     </header>
 
     <main class="gallery-main">
-        <div class="gallery-grid" id="gallery-grid">
-        </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
     </main>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-btn" id="close-btn">×</span>
+        <img id="lightbox-img" src="" alt="">
+    </div>
 
     <footer>
         <p>© 2026 Rekav</p>
     </footer>
-
+	<script src="https://unpkg.com/masonry-grid@latest/dist/masonry-grid.min.js"></script>
     <script src="js/gallery.js"></script>
 </body>
 </html>

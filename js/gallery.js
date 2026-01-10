@@ -1,68 +1,71 @@
-// js/gallery.js
-
-document.addEventListener('DOMContentLoaded', () => {
+// js/gallery.js — Stable version: JSON + size mapping + lightbox
+document.addEventListener('DOMContentLoaded', async () => {
     const grid = document.getElementById('gallery-grid');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('close-btn');
 
-    // Chill, neutral captions
-    const captions = [
-        'Quiet morning light',
-        'City skyline at dusk',
-        'Coffee and code',
-        'Rain on the window',
-        'Old book pages',
-        'Minimal desk setup',
-        'Forest path',
-        'Neon lights reflection',
-        'Terminal glow',
-        'Evening walk',
-        'Abstract shapes',
-        'Black and white street',
-        'Sunset over water',
-        'Keyboard close-up',
-        'Cozy room corner',
-        'Train window view',
-        'Plant on shelf',
-        'Night drive',
-        'Handwritten notes',
-        'Soft shadows'
-    ];
+    const sizeMapping = {
+        'landscape-small':  'normal',
+        'landscape-medium': 'wide',
+        'landscape-large':  'big',
+        'square-small':     'normal',
+        'square-medium':    'big',
+        'square-large':     'big',
+        'portrait-small':   'normal',
+        'portrait-medium':  'tall',
+        'portrait-large':   'tall'
+    };
 
-    // Keywords for variety (all calm/neutral themes)
-    const keywords = [
-        'nature', 'city', 'landscape', 'abstract', 'minimal',
-        'coffee', 'rain', 'window', 'book', 'desk',
-        'forest', 'neon', 'terminal', 'sunset', 'keyboard',
-        'room', 'train', 'plant', 'night', 'street'
-    ];
+    try {
+        const response = await fetch('gallery.json');
+        if (!response.ok) throw new Error('Failed to load gallery data');
 
-    const imageCount = 16; // Nice number for chaotic packing
+        const data = await response.json();
+        let images = data.images;
 
-    for (let i = 0; i < imageCount; i++) {
-        // Random keyword for themed variety
-        const keyword = keywords[Math.floor(Math.random() * keywords.length)];
+        images = images.sort(() => Math.random() - 0.5);
 
-        // Better size range for visible impact
-        const width = 600 + Math.floor(Math.random() * 600);  // 900-1500
-        const height = 250 + Math.floor(Math.random() * 800); // 600-1400
+		images.forEach(item => {
+			const galleryItem = document.createElement('div');
+			const cssClass = sizeMapping[item.size] || 'normal';
+			galleryItem.className = `gallery-item ${cssClass}`;
 
-        // More chance of larger items
-        const sizes = ['normal', 'normal', 'wide', 'tall', 'big', 'wide'];
-        const sizeClass = sizes[Math.floor(Math.random() * sizes.length)];
+			const img = document.createElement('img');
+			img.src = item.url;
+			img.alt = item.title || 'Rekav gallery image';
+			img.loading = 'lazy';
 
-        // Random caption
-        const caption = captions[Math.floor(Math.random() * captions.length)];
+			img.addEventListener('load', () => {
+				galleryItem.classList.add('loaded');
+			}, { once: true });
 
-        const item = document.createElement('div');
-        item.className = `gallery-item ${sizeClass}`;
+			galleryItem.appendChild(img);
+			grid.appendChild(galleryItem);
 
-        // LoremFlickr URL format: https://loremflickr.com/{width}/{height}/{keyword}
-        const imgUrl = `https://loremflickr.com/${width}/${height}/${keyword}`;
-
-        item.innerHTML = `
-            <img src="${imgUrl}" alt="${caption}" loading="lazy">
-            <div class="gallery-caption">${caption}</div>
-        `;
-
-        grid.appendChild(item);
+			galleryItem.addEventListener('click', () => {
+				lightboxImg.src = item.url;
+				lightbox.classList.add('active');
+				document.body.style.overflow = 'hidden';
+			});
+		});
+    } catch (error) {
+        console.error('Gallery error:', error);
+        grid.innerHTML = '<p style="color:#ff6b6b; text-align:center; padding:40px;">Failed to load images</p>';
     }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
 });
